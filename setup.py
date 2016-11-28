@@ -8,4 +8,7 @@ setup(name='watchman',
               'watchman = watchman.main:main'
           ]
       },
+      install_requires=[
+        'colorama==0.3.7'
+      ]
       )
