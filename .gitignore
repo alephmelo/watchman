@@ -63,3 +63,6 @@ target/
 
 #mac shit
 .DS_Store
+
+#flit
+flit.ini
