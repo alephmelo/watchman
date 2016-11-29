@@ -66,3 +66,7 @@ target/
 
 #flit
 flit.ini
+
+#folders env
+env34/
+env27/
