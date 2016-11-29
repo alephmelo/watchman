@@ -15,13 +15,11 @@ def check():
     child_dirs = _get_subdirectories(current_working_directory)
     for child in child_dirs:
         try:
-            change_dir = '%s/%s' % (current_working_directory, child)
-            cd(change_dir); current_branch = hg('branch')
-
+            current_branch = hg('branch', '-R', './%s' % child)
             output = '%-25s is on branch: %s' % (child, current_branch)
+            print(output, end='')
 
-            print(output, end=''); cd('..')  # print and step back one dir
-        except Exception:
+        except Exception as e:
             continue
 
 
