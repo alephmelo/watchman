@@ -4,22 +4,27 @@ from sh import cd, hg
 
 
 def _get_subdirectories(current_dir):
-    return [name for name in os.listdir(current_dir) 
-            if os.path.isdir(os.path.join(current_dir, name))]
+    return [directory for directory in os.listdir(current_dir) 
+            if os.path.isdir(os.path.join(current_dir, directory))
+            and directory[0] != '.']
 
 
 def check():
     current_working_directory = os.getcwd()
     child_dirs = _get_subdirectories(current_working_directory)
     for child in child_dirs:
-        if child[0] != '.': 
-            try:
-                cd('%s/%s' % (current_working_directory, child))
-                current_branch = hg('branch')
-                print('%s is on branch: %s' % (child, current_branch), end='')
-                cd('..')
-            except Exception:
-                continue
+        try:
+            change_dir = '%s/%s' % (current_working_directory, child)
+            cd(change_dir)
+
+            current_branch = hg('branch')
+
+            output = '%-25s is on branch: %s' % (child, current_branch)
+            print(output, end='')
+
+            cd('..')
+        except Exception:
+            continue
 
 
 def main():
