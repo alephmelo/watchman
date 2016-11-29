@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='watchman',
-      version='0.0.2',
+      version='0.0.3',
       packages=['watchman'],
       entry_points={
           'console_scripts': [

@@ -15,7 +15,7 @@ def check():
     child_dirs = _get_subdirectories(current_working_directory)
     for child in child_dirs:
         try:
-            current_branch = hg('branch', '-R', './%s' % child)
+            current_branch = hg.branch('-R', './%s' % child)
             output = '%-25s is on branch: %s' % (child, current_branch)
             print(output, end='')
 
