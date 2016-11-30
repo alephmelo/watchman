@@ -16,10 +16,10 @@ def _get_subdirectories(current_dir):
 
 def check(scm):
     if scm == 'hg':
-        command = "hg.branch('-R', './%s' % child)"
+        command = "hg.branch('-R', './%s' % (child))"
 
     elif scm == 'git':
-        command = "git('--git-dir', './%s/.git' % child, 'name-rev', '--name-only', 'HEAD')"
+        command = "git('--git-dir', './%s/.git' % (child), 'name-rev', '--name-only', 'HEAD')"
 
     if scm in SCM_OPTIONS:
         current_working_directory = os.getcwd()
