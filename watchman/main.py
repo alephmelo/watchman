@@ -2,7 +2,7 @@ from __future__ import print_function
 from argparse import ArgumentParser
 import sys
 import os
-from sh import cd, hg, watchman, ls
+from sh import cd, hg, watchman
 
 
 SCM_OPTIONS = ['git', 'hg']
@@ -41,7 +41,11 @@ def main():
 
     arguments = parser.parse_args()
     if arguments.check:
-        check(arguments.scm)
+        if arguments.scm is not None:
+            check(arguments.scm)
+        else:
+            arguments.scm = 'hg'
+            check(arguments.scm)
 
 
 if __name__ == '__main__':
