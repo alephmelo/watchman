@@ -19,7 +19,7 @@ def check(scm):
         command = "hg.branch('-R', './%s' % child)"
 
     elif scm == 'git':
-        command = "git('name-rev', '--name-only', 'HEAD')"
+        command = "git('--git-dir', './%s/.git' % child, 'name-rev', '--name-only', 'HEAD')"
 
     if scm in SCM_OPTIONS:
         current_working_directory = os.getcwd()
