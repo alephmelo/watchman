@@ -9,10 +9,20 @@ $ pip install watchman
 From the directory containing all your projects (subfolders):
 ```
 $ watchman check
-```
+project1                     is on branch: default
+project2                     is on branch: default
+project3                     is on branch: development
 
+```
+Note: Default scm app is mercurial, if you use git just set -s flag:
+```
+$ watchman check -s git
+project1                     is on branch: master
+project2                     is on branch: patch-1
+project3                     is on branch: dev
+```
 ## TODO (lots of it)
-- [ ] Optional git or mercurial
+- [x] Optional git or mercurial
 - [ ] Set all to <name> branch (e.g. master/default)
 - [ ] Coloring for better UX
 - [ ] Many more.

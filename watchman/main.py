@@ -2,7 +2,7 @@ from __future__ import print_function
 from argparse import ArgumentParser
 import sys
 import os
-from sh import cd, hg, watchman
+from sh import cd, hg, watchman, git
 
 
 SCM_OPTIONS = ['git', 'hg']
@@ -15,12 +15,18 @@ def _get_subdirectories(current_dir):
 
 
 def check(scm):
+    if scm == 'hg':
+        command = "hg.branch('-R', './%s' % child)"
+
+    elif scm == 'git':
+        command = "git('name-rev', '--name-only', 'HEAD')"
+
     if scm in SCM_OPTIONS:
         current_working_directory = os.getcwd()
         child_dirs = _get_subdirectories(current_working_directory)
         for child in child_dirs:
             try:
-                current_branch = hg.branch('-R', './%s' % child)
+                current_branch = eval(command)
                 output = '%-25s is on branch: %s' % (child, current_branch)
                 print(output, end='')
             except Exception as e:
