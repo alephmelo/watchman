@@ -24,5 +24,5 @@ project3                     is on branch: dev
 ## TODO (lots of it)
 - [x] Optional git or mercurial
 - [ ] Set all to <name> branch (e.g. master/default)
-- [ ] Coloring for better UX
+- [x] Coloring for better UX
 - [ ] Many more.
