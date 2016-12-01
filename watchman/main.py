@@ -1,11 +1,15 @@
 from __future__ import print_function
-from argparse import ArgumentParser
+from argparse   import ArgumentParser
+from colorama   import Fore, init
+from sh         import cd, hg, git, watchman
 import sys
 import os
-from sh import cd, hg, watchman, git
 
+
+init(autoreset=True)  # colorama init
 
 SCM_OPTIONS = ['git', 'hg']
+TEXT_COLOR = Fore.GREEN
 
 
 def _get_subdirectories(current_dir):
@@ -27,7 +31,7 @@ def check(scm):
         for child in child_dirs:
             try:
                 current_branch = eval(command)
-                output = '%-25s is on branch: %s' % (child, current_branch)
+                output = '%-25s is on branch: %s%s' % (child, TEXT_COLOR, current_branch)
                 print(output, end='')
             except Exception as e:
                 continue
