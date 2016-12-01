@@ -1,4 +1,8 @@
-# Watchman
+# Watchman 
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/alephmelo/watchman/issues)
+[![PyPI version](https://badge.fury.io/py/watchman.svg)](https://badge.fury.io/py/watchman)
+[![PyPI python versions](https://img.shields.io/pypi/pyversions/watchman.svg)](https://pypi.python.org/pypi/watchman)
+
 
 ## Installation
 ```
