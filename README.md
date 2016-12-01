@@ -21,7 +21,13 @@ project1                     is on branch: master
 project2                     is on branch: patch-1
 project3                     is on branch: dev
 ```
-
+## Contributing
+Just clone the repo and install via Python
+```
+$ git clone git@github.com:alephmelo/watchman.git
+$ cd watchman
+$ python setup.py develop
+```
 ## Demo
 ![demo](assets/demo.gif)
 ## TODO (lots of it)
