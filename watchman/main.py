@@ -1,8 +1,7 @@
 from __future__ import print_function
-from argparse   import ArgumentParser
-from colorama   import Fore, init
-from sh         import cd, hg, git, watchman
-import sys
+from argparse import ArgumentParser
+from colorama import Fore, init
+import subprocess
 import os
 
 
@@ -13,36 +12,53 @@ TEXT_COLOR = Fore.GREEN
 
 
 def _get_subdirectories(current_dir):
-    return [directory for directory in os.listdir(current_dir) 
+    return [directory for directory in os.listdir(current_dir)
             if os.path.isdir(os.path.join(current_dir, directory))
             and directory[0] != '.']
 
 
-def check(scm):
+def _get_command(scm, child_dir):
     if scm == 'hg':
-        command = "hg.branch('-R', './%s' % (child))"
+        return ['hg', 'branch', '-R', './{}'.format(child_dir)]
+    if scm == 'git':
+        return ['git', '--git-dir', './{}/.git'.format(child_dir),
+                'name-rev', '--name-only', 'HEAD']
+    return None
 
-    elif scm == 'git':
-        command = "git('--git-dir', './%s/.git' % (child), 'name-rev', '--name-only', 'HEAD')"
+
+def _clean_response(output):
+    clean_output = output.decode()
+    if '\n' in clean_output:
+        clean_output = clean_output.replace('\n', '')
+    if '\r' in clean_output:
+        clean_output = clean_output.replace('\r', '')
+    return clean_output
+
+
+def check(scm):
 
     if scm in SCM_OPTIONS:
         current_working_directory = os.getcwd()
         child_dirs = _get_subdirectories(current_working_directory)
         for child in child_dirs:
             try:
-                current_branch = eval(command)
-                output = '%-25s is on branch: %s%s' % (child, TEXT_COLOR, current_branch)
-                print(output, end='')
+                command = _get_command(scm, child)
+                response = subprocess.check_output(command)
+                current_branch = _clean_response(response)
+                output = '%-25s is on branch: %s%s' % (
+                    child, TEXT_COLOR, current_branch)
+                print(output)
             except Exception as e:
                 continue
     else:
         print("The scm you typed is not supported yet or you just misspelled\nCurrent options are: hg (mercurial) or git.\n")
-        print(watchman('--help'))
+        subprocess.call(['watchman', '--help'])
 
 
 def main():
     parser = ArgumentParser()
-    parser.add_argument('check', help='checks branch status of all immediate subdirectories')
+    parser.add_argument(
+        'check', help='checks branch status of all immediate subdirectories')
     parser.add_argument('-s',
                         '--scm',
                         help='specify source code management application commands\
