@@ -21,6 +21,9 @@ project1                     is on branch: master
 project2                     is on branch: patch-1
 project3                     is on branch: dev
 ```
+
+## Demo
+![demo](assets/demo.gif)
 ## TODO (lots of it)
 - [x] Optional git or mercurial
 - [ ] Set all to <name> branch (e.g. master/default)
