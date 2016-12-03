@@ -13,8 +13,8 @@ TEXT_COLOR = Fore.GREEN
 
 def _get_subdirectories(current_dir):
     return [directory for directory in os.listdir(current_dir)
-            if os.path.isdir(os.path.join(current_dir, directory))
-            and directory[0] != '.']
+            if os.path.isdir(os.path.join(current_dir, directory)) and
+            directory[0] != '.']
 
 
 def _get_command(scm, child_dir):
@@ -43,12 +43,12 @@ def check(scm):
         for child in child_dirs:
             try:
                 command = _get_command(scm, child)
-                response = subprocess.check_output(command)
+                response = subprocess.check_output(command, stderr=subprocess.STDOUT)
                 current_branch = _clean_response(response)
                 output = '%-25s is on branch: %s%s' % (
                     child, TEXT_COLOR, current_branch)
                 print(output)
-            except Exception as e:
+            except:
                 continue
     else:
         print("The scm you typed is not supported yet or you just misspelled\nCurrent options are: hg (mercurial) or git.\n")
