@@ -38,4 +38,5 @@ $ python setup.py develop
 - [x] Optional git or mercurial
 - [ ] Set all to <name> branch (e.g. master/default)
 - [x] Coloring for better UX
+- [ ] Sign of stash change
 - [ ] Many more.
