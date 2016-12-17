@@ -9,7 +9,6 @@ setup(name='watchman',
           ]
       },
       install_requires=[
-        'colorama==0.3.7',
-        'sh==1.12.0'
+        'colorama==0.3.7'
       ]
       )
