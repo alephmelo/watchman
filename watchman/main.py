@@ -12,9 +12,10 @@ TEXT_COLOR = Fore.GREEN
 
 
 def _get_subdirectories(current_dir):
-    return [directory for directory in os.listdir(current_dir)
+    dirs = [directory for directory in os.listdir(current_dir)
             if os.path.isdir(os.path.join(current_dir, directory)) and
             directory[0] != '.']
+    return sorted(dirs)
 
 
 def _get_command(scm, child_dir):
