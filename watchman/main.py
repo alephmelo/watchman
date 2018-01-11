@@ -46,7 +46,7 @@ def check(scm):
                 command = _get_command(scm, child)
                 response = subprocess.check_output(command, stderr=subprocess.STDOUT)
                 current_branch = _clean_response(response)
-                output = '%-25s is on branch: %s%s' % (
+                output = '%-35s is on branch: %s%s' % (
                     child, TEXT_COLOR, current_branch)
                 print(output)
             except:
